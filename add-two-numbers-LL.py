@@ -1,4 +1,4 @@
-# https://leetcode.com/problems/add-two-numbers/   Python3   28ms
+# https://leetcode.com/problems/add-two-numbers/   Python3   120 ms | 13.9 MB
 
 # Definition for singly-linked list.
 # class ListNode:
