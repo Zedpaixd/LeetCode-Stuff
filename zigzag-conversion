@@ -1,0 +1,77 @@
+# https://leetcode.com/problems/zigzag-conversion   | Python 3
+
+Runtime: 51 ms          faster than 98.08%
+Memory Usage: 14.2 MB   lower than 29.40%
+
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+
+        if numRows==1:
+            return s
+        
+        pattern= 2*(numRows-1)
+        
+        d={i:i if i<numRows else (pattern-i) for i in range(pattern)}
+        
+        splitting=["" for i in range(numRows)]
+        
+        for i in range(len(s)):
+            splitting[d[i%pattern]] += s[i]
+            
+        return "".join(splitting)
+        
+# https://leetcode.com/submissions/detail/752340264/
+        
+# ~~~~ C++ via matrix building ~~~~
+
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        // numRows = 4;
+        if (numRows == 1 || s.length()<=numRows)
+            return s;
+        
+        int line = 0, column = 0, oglen = s.length()/2+1;
+        string output;
+        char a[numRows][s.length()];
+        
+        for(int i=0; i<numRows;i++)
+            for (int j=0;j<oglen;j++)
+                a[i][j]=' ';
+        
+        while (s.length() > 0)
+        {
+            int i = 0;
+            while (i < numRows && s.length() > 0)
+            {
+                line = i;
+                a[line][column] = s[0];
+                s.erase(0,1);
+                i++;
+            }
+            
+            while (line > 1 and s.length() > 0)
+            {
+                line --;
+                column ++;
+                a[line][column] = s[0];
+                s.erase(0,1);
+            }
+            column++;
+        }
+        
+        for(int i=0; i<numRows;i++)
+        {
+            for (int j=0;j<oglen;j++)
+                {
+                    if(isalnum(a[i][j]) || ispunct(a[i][j]))
+                        output.push_back(a[i][j]);
+                
+            }
+        }  
+        
+        return output;
+    }
+};
+
+// https://leetcode.com/submissions/detail/752333483/
